@@ -49,7 +49,16 @@ config = {
     // Configure your URL and mail settings here
     production: {
         url: 'http://neillobo.azurewebsites.net',
-        mail: {},
+        mail: {
+            transport: 'SMTP',
+            options: {
+                service: 'Gmail',
+                auth: {
+                    user: 'ghostazure@gmail.com',
+                    pass: 'qsefzxcv'
+                }
+            }            
+        },
         database: {
             client: 'sqlite3',
             connection: {
