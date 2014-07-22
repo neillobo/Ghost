@@ -1,0 +1,70 @@
+{{!< default}}
+
+{{! The comment above "< default" means - insert everything in this file into
+    the {body} of the default.hbs template, which contains our header/footer. }}
+
+
+{{! The big featured header on the homepage, with the site description }}
+
+<header class="main-header">
+    <div class="wrapper">
+        <div class="grid-container grid-720">
+            <div class="inner-header">
+                <span class="table-span">
+                    <span>
+                        <h1 itemprop="name">{{@blog.title}}</h1>
+                        <h2 itemprop="description">{{@blog.description}}</h2>
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+{{! The main content area on the homepage }}
+<section id="post-container" role='main' class="main-section hide-post">
+    <div class="grid-container grid-720">
+    
+    {{#if @blog.cover}}<img id="bg-img" src="{{@blog.cover}}">{{/if}}
+
+    {{! Each post will be output using this markup }}
+    {{#foreach posts}}
+    <article class="post" id="{{id}}" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="wrapper">
+            <header>
+                <h2 class="post-title" itemprop="name headline"><a href="{{url}}" class="post-link">{{{title}}}</a></h2>
+            </header>
+            <section class="post-text" itemprop="articleBody text">
+                <p>{{excerpt}}&hellip;</p>
+            </section>
+            <footer>
+                <ul>
+                    <li itemprop="author" itemscope itemtype="http://schema.org/Person">
+                        {{#if author.image}}
+                        <img class="author-image" src="{{author.image}}" alt="{{author.name}}">
+                        {{/if}}
+                        <span class="author-info">
+                            <span rel="author" itemprop="url name">{{author.name}}</span> 
+                            <span class="hide-on-mobile">{{tags separator=", " prefix="in "}}</span>
+                        </span>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+    </article>
+
+    {{/foreach}}
+
+    {{!! After all the posts, we have the previous/next pagination links }}
+    
+    </div>
+
+
+</section>
+<section>
+    <div class="grid-container grid-720">
+        {{pagination}}
+    </div>
+</section>
+
